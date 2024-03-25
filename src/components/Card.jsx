@@ -13,7 +13,8 @@ export default function Card({ name, img, onClick }) {
         className="image-container"
         style={{
           backgroundImage: `url(${img})`,
-          backgroundSize: 'cover'
+          backgroundSize: "cover",
+          backgroundPosition: "-2px 0px",
         }}
         aria-label={name}
         onClick={onClick}

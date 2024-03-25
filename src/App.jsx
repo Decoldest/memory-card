@@ -43,15 +43,19 @@ export default function App({ difficulty }) {
 
   function handleCardClick(id) {
     if (seenCharacters.includes(id)) {
-      setGameOver({ isOver: true, win:false });
-      console.log(gameOver);
+      setGameOver({ isOver: true, win: false });
 
       return;
     }
+
     setScore(score + 1);
     setSeenCharacters([...seenCharacters, id]);
 
-    shuffleCardState();
+    if (score === difficulty - 1) {
+      setGameOver({ isOver: true, win: true });
+    } else {
+      shuffleCardState();
+    }
   }
 
   useEffect(() => {
