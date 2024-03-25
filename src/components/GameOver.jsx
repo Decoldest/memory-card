@@ -1,12 +1,21 @@
 import PropTypes from "prop-types";
 
 GameOver.propTypes = {
-  score: PropTypes.number.isRequired,
+  win: PropTypes.bool.isRequired,
 }
 
-export default function GameOver () {
+export default function GameOver ({win}) {
   return (
-    <div>
-    </div>
+    <>
+      {win ? (
+        <div>
+          You win
+        </div>
+      ) : (
+        <div>
+          You Lose
+        </div>
+      )}
+    </>
   )
 }

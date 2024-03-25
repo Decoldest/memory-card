@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "./components/Card";
 import Score from "./components/Score";
+import GameOver from "./components/GameOver";
 
 import "./App.css";
 
@@ -33,8 +34,7 @@ export default function App({ difficulty }) {
   const [cardData, setCardData] = useState([]);
   const [score, setScore] = useState(0);
   const [seenCharacters, setSeenCharacters] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
-
+  const [gameOver, setGameOver] = useState({ isOver: false, win: false });
 
   const shuffleCardState = () => {
     const temp = shuffleArray([...cardData]);
@@ -43,7 +43,10 @@ export default function App({ difficulty }) {
 
   function handleCardClick(id) {
     if (seenCharacters.includes(id)) {
-      setGameOver(true);
+      setGameOver({ isOver: true, win:false });
+      console.log(gameOver);
+
+      return;
     }
     setScore(score + 1);
     setSeenCharacters([...seenCharacters, id]);
@@ -79,7 +82,6 @@ export default function App({ difficulty }) {
   }, [difficulty]);
 
   return (
-    
     <div>
       <div>
         <Score score={score} />
@@ -95,6 +97,7 @@ export default function App({ difficulty }) {
           />
         ))}
       </div>
+      {gameOver.isOver && <GameOver win={gameOver.win} />}
     </div>
   );
 }
