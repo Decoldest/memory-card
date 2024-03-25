@@ -1,20 +1,39 @@
-import {useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import Card from "./components/Card";
+import "./App.css"
 
-const randomIndices = new Set();
-while (randomIndices.size != 8) {
-  randomIndices.add(Math.floor(Math.random() * 427) + 1);
-}
+const indices = [
+  1, 16, 24, 131, 143, 172, 179, 206, 212, 134, 259, 267, 278, 279, 305, 320,
+  363, 420, 421, 423, 424, 425,
+];
 
 App.propTypes = {
   difficulty: PropTypes.number.isRequired,
 };
 
+function shuffleArray(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex > 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      [array[randomIndex]],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+
 export default function App({ difficulty }) {
   const [cardData, setCardData] = useState([]);
-  const characterIndices = [...randomIndices].slice(0, difficulty);
 
   useEffect(() => {
+    const characterIndices = shuffleArray(indices).slice(0, difficulty);
+
     async function getCharacters() {
       try {
         const fetchedCharacterData = await Promise.all(
@@ -24,10 +43,14 @@ export default function App({ difficulty }) {
               { mode: "cors" },
             );
             const characterData = await response.json();
-            return characterData;
+            return characterData ? characterData : null;
           }),
         );
-        setCardData(fetchedCharacterData);
+        const validCharacterData = fetchedCharacterData.filter((character) => {
+          return character.image !== null;
+        });
+
+        setCardData(validCharacterData);
       } catch (error) {
         console.log(error);
       }
@@ -37,12 +60,16 @@ export default function App({ difficulty }) {
 
   return (
     <div>
-      <h2>hello</h2>
-      <ul>
+      <div className="card-container">
         {cardData.map((character) => (
-          <li key={character.id}>{character.name}</li>
+          <Card
+            key={character.id}
+            id={character.id}
+            img={character.image}
+            name={character.name}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
