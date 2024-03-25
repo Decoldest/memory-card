@@ -1,8 +1,6 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: 'Futurama';
+  src: url('./assets/fonts/fr-fal1.ttf');
 }
 
 .card-container {
@@ -16,7 +14,11 @@
 }
 
 .card {
-  padding: 2em;
+  font-size: 1.5rem;
+  font-family: 'Futurama';
+  padding: 5px;
+  background-color: #008EA0ff;
+  border-radius: 10px;
 }
 
 img {
@@ -24,6 +26,7 @@ img {
 }
 
 .image-container {
+  border-radius: 5px;
   width: 100%;
   height: 200px;
   overflow: hidden;

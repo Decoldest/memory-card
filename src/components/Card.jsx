@@ -8,8 +8,7 @@ Card.propTypes = {
 
 export default function Card({ name, img, onClick }) {
   return (
-    <div>
-      <h5>{name}</h5>
+    <div className="card">
       <div
         className="image-container"
         style={{
@@ -19,6 +18,7 @@ export default function Card({ name, img, onClick }) {
         aria-label={name}
         onClick={onClick}
       ></div>
+      <h5>{name}</h5>
     </div>
   );
 }

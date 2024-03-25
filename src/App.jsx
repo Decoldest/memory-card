@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "./components/Card";
+import Score from "./components/Score";
+
 import "./App.css";
 
 const indices = [
@@ -13,15 +15,15 @@ App.propTypes = {
 };
 
 function shuffleArray(array) {
-  console.log(array);
   let currentIndex = array.length;
 
   while (currentIndex--) {
     const randomIndex = Math.floor(Math.random() * currentIndex);
-    
+
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex],
-      array[currentIndex]];
+      array[currentIndex],
+    ];
   }
 
   return array;
@@ -29,13 +31,25 @@ function shuffleArray(array) {
 
 export default function App({ difficulty }) {
   const [cardData, setCardData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [seenCharacters, setSeenCharacters] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+
 
   const shuffleCardState = () => {
-    console.log([...cardData]);
     const temp = shuffleArray([...cardData]);
-    console.log(temp);
     setCardData(temp);
   };
+
+  function handleCardClick(id) {
+    if (seenCharacters.includes(id)) {
+      setGameOver(true);
+    }
+    setScore(score + 1);
+    setSeenCharacters([...seenCharacters, id]);
+
+    shuffleCardState();
+  }
 
   useEffect(() => {
     const characterIndices = shuffleArray(indices).slice(0, difficulty);
@@ -65,7 +79,11 @@ export default function App({ difficulty }) {
   }, [difficulty]);
 
   return (
+    
     <div>
+      <div>
+        <Score score={score} />
+      </div>
       <div className="card-container">
         {cardData.map((character) => (
           <Card
@@ -73,7 +91,7 @@ export default function App({ difficulty }) {
             id={character.id}
             img={character.image}
             name={character.name}
-            onClick={shuffleCardState}
+            onClick={() => handleCardClick(character.id)}
           />
         ))}
       </div>
