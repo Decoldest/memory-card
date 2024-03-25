@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "./components/Card";
-import "./App.css"
+import "./App.css";
 
 const indices = [
-  1, 16, 24, 131, 143, 172, 179, 206, 212, 134, 259, 267, 278, 279, 305, 320,
-  363, 420, 421, 423, 424, 425,
+  1, 16, 24, 131, 143, 172, 179, 206, 134, 267, 278, 279, 305, 320, 363, 420,
+  421, 423, 424, 425,
 ];
 
 App.propTypes = {
@@ -13,16 +13,15 @@ App.propTypes = {
 };
 
 function shuffleArray(array) {
-  let currentIndex = array.length,
-    randomIndex;
+  console.log(array);
+  let currentIndex = array.length;
 
-  while (currentIndex > 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+  while (currentIndex--) {
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    
     [array[currentIndex], array[randomIndex]] = [
-      [array[randomIndex]],
-      array[currentIndex],
-    ];
+      array[randomIndex],
+      array[currentIndex]];
   }
 
   return array;
@@ -30,6 +29,13 @@ function shuffleArray(array) {
 
 export default function App({ difficulty }) {
   const [cardData, setCardData] = useState([]);
+
+  const shuffleCardState = () => {
+    console.log([...cardData]);
+    const temp = shuffleArray([...cardData]);
+    console.log(temp);
+    setCardData(temp);
+  };
 
   useEffect(() => {
     const characterIndices = shuffleArray(indices).slice(0, difficulty);
@@ -56,7 +62,7 @@ export default function App({ difficulty }) {
       }
     }
     getCharacters();
-  }, []);
+  }, [difficulty]);
 
   return (
     <div>
@@ -67,6 +73,7 @@ export default function App({ difficulty }) {
             id={character.id}
             img={character.image}
             name={character.name}
+            onClick={shuffleCardState}
           />
         ))}
       </div>
