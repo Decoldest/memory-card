@@ -1,22 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @font-face {
   font-family: 'Futurama';
   src: url('./assets/fonts/fr-fal1.ttf');
 }
 
-@media only screen and (max-width: 500px) {
-  main .start-container {
+@media only screen and (max-width: 600px) {
+  main>div.start-container {
     background-image: url('./assets/logo500.png');
-    height: 225px;
+    height: 260px;
+    background-position: center 10%;
+  }
+  main>div.start-container>h2 {
+    display: none;
+  }
+
+  main div.difficulty-buttons button {
+    font-size: 14px;
+  }
+
+  main div.card-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .card>div.image-container {
+    height: 150px;
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  .start-container {
+  div .start-container {
     background-image: url('./assets/logo1000.png');
     height: 350px;
   }
+
+  div.difficulty-buttons button {
+    font-size: 18px;
+  }
+
+  div .card-container {
+    padding: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  }
+
+  div .image-container {
+    height: 175px;
+  }
+
+  div .card {
+    font-size: 20px;
+  }
 }
 
+@media only screen and (min-width: 1500px) {
+  div .start-container {
+    height: 900px;
+  }
+
+  div .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+
+  div .image-container {
+    height: 400px;
+  }
+
+  div .card {
+    font-size: 38px;
+  }
+}
 /* @media (max-width: 1500px) {
   .start-container {
     background-image: url('./assets/logo.png');
@@ -34,7 +86,7 @@
 }
 
 .card {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-family: 'Futurama';
   padding: 5px;
   background-color: #008EA0ff;
@@ -68,18 +120,21 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  background-color: rgb(99, 99, 99);
   text-align: center;
+  background-image: url('./assets/logo.png');
+  height: 600px;
   background-size: cover;
-  background-position: center;
+  background-position: center 80%;
   font-size: 1.5svw;
+  padding-bottom: 5px;
 }
 
 .start-container h2 {
-  color: #ab1609;
+  margin-bottom: 5px;
+  color: white;
   font-weight: 700;
-  /* -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: #ebd344; */
+  font-family: "Be Vietnam Pro";
+  text-shadow: 8px 5px rgb(12, 52, 53);
 }
 
 .difficulty-buttons {
@@ -91,9 +146,14 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 20px;
   color: white;
+  font-size: 1.5svw;
 }
 .difficulty-buttons img {
   width: 10svw;
+}
+
+button {
+  background-color: #1A5354FF;
 }
