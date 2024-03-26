@@ -39,5 +39,29 @@ img {
   width: 400px;
   height: 400px;
   z-index: 2;
-  background-color: red;
+  border: solid grey 1px;
+}
+
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: rgb(99, 99, 99);
+  text-align: center;
+  height: 600px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.difficulty-buttons button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.difficulty-buttons img {
+  width: 100px;
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Card from "./components/Card";
 import Score from "./components/Score";
 import GameOver from "./components/GameOver";
+import Start from "./Start";
 
 import "./App.css";
 
@@ -10,10 +10,6 @@ const indices = [
   1, 16, 24, 131, 143, 172, 179, 206, 134, 267, 278, 279, 305, 320, 363, 420,
   421, 423, 424, 425,
 ];
-
-App.propTypes = {
-  difficulty: PropTypes.number.isRequired,
-};
 
 function shuffleArray(array) {
   let currentIndex = array.length;
@@ -30,11 +26,12 @@ function shuffleArray(array) {
   return array;
 }
 
-export default function App({ difficulty }) {
+export default function App() {
   const [cardData, setCardData] = useState([]);
   const [score, setScore] = useState(0);
   const [seenCharacters, setSeenCharacters] = useState([]);
   const [gameOver, setGameOver] = useState({ isOver: false, win: false });
+  const [difficulty, setDifficulty] = useState(10);
 
   const shuffleCardState = () => {
     const temp = shuffleArray([...cardData]);
@@ -86,22 +83,25 @@ export default function App({ difficulty }) {
   }, [difficulty]);
 
   return (
-    <div>
+    <main>
+      <Start setDifficulty={setDifficulty} />
       <div>
-        <Score score={score} />
-      </div>
-      <div className="card-container">
-        {cardData.map((character) => (
-          <Card
-            key={character.id}
-            id={character.id}
-            img={character.image}
-            name={character.name}
-            onClick={() => handleCardClick(character.id)}
-          />
-        ))}
+        <div>
+          <Score score={score} />
+        </div>
+        <div className="card-container">
+          {cardData.map((character) => (
+            <Card
+              key={character.id}
+              id={character.id}
+              img={character.image}
+              name={character.name}
+              onClick={() => handleCardClick(character.id)}
+            />
+          ))}
+        </div>
       </div>
       {gameOver.isOver && <GameOver win={gameOver.win} />}
-    </div>
+    </main>
   );
 }
