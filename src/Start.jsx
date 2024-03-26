@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import fry from "./assets/fry.png";
 import zoidberg from "./assets/zoidberg.png";
 import leela from "./assets/leela.png";
-import logo from "./assets/logo.png";
 
 Start.propTypes = {
   setDifficulty: PropTypes.func,
@@ -10,15 +9,8 @@ Start.propTypes = {
 
 export default function Start({ setDifficulty }) {
   return (
-    <div
-      className="start-container"
-      style={{ backgroundImage: `url(${logo})`,
-      backgroundSize: "100% auto",
-      backgroundRepeat: "no-repeat"
-
-     }}
-    >
-      <h2>Select Each Character Only Once. Choose your difficulty:</h2>
+    <div className="start-container">
+      <h2>Select Each Character Once. Choose difficulty:</h2>
       <div className="difficulty-buttons">
         <button onClick={() => setDifficulty(5)}>
           <img src={fry} alt="Philip J Fry" />

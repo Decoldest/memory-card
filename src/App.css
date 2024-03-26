@@ -3,6 +3,27 @@
   src: url('./assets/fonts/fr-fal1.ttf');
 }
 
+@media only screen and (max-width: 500px) {
+  main .start-container {
+    background-image: url('./assets/logo500.png');
+    height: 225px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .start-container {
+    background-image: url('./assets/logo1000.png');
+    height: 350px;
+  }
+}
+
+/* @media (max-width: 1500px) {
+  .start-container {
+    background-image: url('./assets/logo.png');
+    height: 600px;
+  }
+} */
+
 .card-container {
   overflow: auto;
   display: grid;
@@ -49,7 +70,16 @@ img {
   justify-content: flex-end;
   background-color: rgb(99, 99, 99);
   text-align: center;
-  height: 600px;
+  background-size: cover;
+  background-position: center;
+  font-size: 1.5svw;
+}
+
+.start-container h2 {
+  color: #ab1609;
+  font-weight: 700;
+  /* -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #ebd344; */
 }
 
 .difficulty-buttons {
@@ -61,7 +91,9 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
+  color: white;
 }
 .difficulty-buttons img {
-  width: 100px;
+  width: 10svw;
 }
