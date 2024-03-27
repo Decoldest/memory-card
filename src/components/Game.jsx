@@ -9,6 +9,7 @@ Game.propTypes = {
   score: PropTypes.number,
   setScore: PropTypes.func,
   difficulty: PropTypes.number,
+  checkBestScore: PropTypes.func,
 };
 
 function shuffleArray(array) {
@@ -33,6 +34,7 @@ export default function Game({
   score,
   setScore,
   difficulty,
+  checkBestScore,
 }) {
   const [seenCharacters, setSeenCharacters] = useState([]);
   const [cardStates, setCardStates] = useState([]);
@@ -49,6 +51,7 @@ export default function Game({
   function handleCardClick(id) {
     if (gameOver.isOver) return;
     if (seenCharacters.includes(id)) {
+      checkBestScore();
       setGameOver({ isOver: true, win: false });
       return;
     }

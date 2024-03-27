@@ -17,11 +17,18 @@ export default function App() {
   const [gameOver, setGameOver] = useState({ isOver: false, win: false });
   const [difficulty, setDifficulty] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [bestScore, setBestScore] = useState(0);
 
   function resetGame() {
     setScore(0);
     setIsPlaying(false);
     setGameOver({ isOver: false, win: false });
+  }
+
+  function checkBestScore() {
+    if (score > bestScore) {
+      setBestScore(score);
+    }
   }
 
   useEffect(() => {
@@ -55,8 +62,8 @@ export default function App() {
         <Start setDifficulty={setDifficulty} setIsPlaying={setIsPlaying} />
       ) : (
         <div>
-          <div>
-            <Score score={score} />
+          <div className="score">
+            <Score score={score} bestScore={bestScore} />
           </div>
           <Game
             characterData={characterData}
@@ -65,6 +72,7 @@ export default function App() {
             score={score}
             setScore={setScore}
             difficulty={difficulty}
+            checkBestScore={checkBestScore}
           />
         </div>
       )}
