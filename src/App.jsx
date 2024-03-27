@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Card from "./components/Card";
+import Game from "./components/Game";
 import Score from "./components/Score";
 import GameOver from "./components/GameOver";
 import Start from "./Start";
@@ -11,57 +11,20 @@ const indices = [
   421, 423, 424, 425,
 ];
 
-function shuffleArray(array) {
-  let currentIndex = array.length;
-
-  while (currentIndex--) {
-    const randomIndex = Math.floor(Math.random() * currentIndex);
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-}
-
 export default function App() {
-  const [cardData, setCardData] = useState([]);
+  const [characterData, setCharacterData] = useState([]);
   const [score, setScore] = useState(0);
-  const [seenCharacters, setSeenCharacters] = useState([]);
   const [gameOver, setGameOver] = useState({ isOver: false, win: false });
-  const [difficulty, setDifficulty] = useState(10);
-
-  const shuffleCardState = () => {
-    const temp = shuffleArray([...cardData]);
-    setCardData(temp);
-  };
-
-  function handleCardClick(id) {
-    if (seenCharacters.includes(id)) {
-      setGameOver({ isOver: true, win: false });
-
-      return;
-    }
-
-    setScore(score + 1);
-    setSeenCharacters([...seenCharacters, id]);
-
-    if (score === difficulty - 1) {
-      setGameOver({ isOver: true, win: true });
-    } else {
-      shuffleCardState();
-    }
-  }
+  const [difficulty, setDifficulty] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const characterIndices = shuffleArray(indices).slice(0, difficulty);
+    // const characterIndices = shuffleArray(indices).slice(0, difficulty);
 
     async function getCharacters() {
       try {
         const fetchedCharacterData = await Promise.all(
-          characterIndices.map(async (index) => {
+          indices.map(async (index) => {
             const response = await fetch(
               `https://futuramaapi.com/api/characters/${index}`,
               { mode: "cors" },
@@ -74,7 +37,7 @@ export default function App() {
           return character.image !== null;
         });
 
-        setCardData(validCharacterData);
+        setCharacterData(validCharacterData);
       } catch (error) {
         console.log(error);
       }
@@ -84,23 +47,23 @@ export default function App() {
 
   return (
     <main>
-      <Start setDifficulty={setDifficulty} />
-      <div>
+      {!isPlaying ? (
+        <Start setDifficulty={setDifficulty} setIsPlaying={setIsPlaying} />
+      ) : (
         <div>
-          <Score score={score} />
+          <div>
+            <Score score={score} />
+          </div>
+          <Game
+            characterData={characterData}
+            gameOver={gameOver}
+            setGameOver={setGameOver}
+            score={score}
+            setScore={setScore}
+            difficulty={difficulty}
+          />
         </div>
-        <div className="card-container">
-          {cardData.map((character) => (
-            <Card
-              key={character.id}
-              id={character.id}
-              img={character.image}
-              name={character.name}
-              onClick={() => handleCardClick(character.id)}
-            />
-          ))}
-        </div>
-      </div>
+      )}
       {gameOver.isOver && <GameOver win={gameOver.win} />}
     </main>
   );

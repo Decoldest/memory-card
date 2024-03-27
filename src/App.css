@@ -79,10 +79,13 @@
 .card-container {
   overflow: auto;
   display: grid;
-  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: rgb(50, 93, 96);
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
   justify-content: center;
+  padding: 5px;
 }
 
 .card {
@@ -134,7 +137,7 @@ img {
   color: white;
   font-weight: 700;
   font-family: "Be Vietnam Pro";
-  text-shadow: 8px 5px rgb(12, 52, 53);
+  text-shadow: 4px 2px rgb(12, 52, 53);
 }
 
 .difficulty-buttons {
