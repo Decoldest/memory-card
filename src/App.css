@@ -6,13 +6,8 @@
 }
 
 @media only screen and (max-width: 600px) {
-  main>div.start-container {
-    background-image: url('./assets/logo500.png');
-    height: 260px;
-    background-position: center 10%;
-  }
   main>div.start-container>h2 {
-    display: none;
+    font-size: 20px;
   }
 
   main div.difficulty-buttons button {
@@ -26,17 +21,13 @@
   .card>div.image-container {
     height: 150px;
   }
-
-  img.disney {
-    height: 40svh;
-    width: auto;
-  }
 }
 
 @media only screen and (max-width: 1000px) {
   div .start-container {
-    background-image: url('./assets/logo1000.png');
-    height: 350px;
+    background-image: url('./assets/PlanetExpress2.jpeg');
+    width: 100%;
+    height: 500 px;
   }
 
   div.difficulty-buttons button {
@@ -59,6 +50,12 @@
   main div.gameover-container h2, main div.gameover-container button {
     top: -10%;
     font-size: 16px;
+  }
+
+  img.disney {
+    height: 50svh;
+    overflow: hidden;
+    object-fit: cover;
   }
 }
 @media only screen and (max-width: 1500px) {
@@ -85,6 +82,10 @@
     font-size: 38px;
   }
  
+}
+
+body {
+  margin: 0;
 }
 
 .card-container {
@@ -166,6 +167,7 @@ img {
   font-weight: 700;
   font-family: "Be Vietnam Pro";
   text-shadow: 4px 2px rgb(12, 52, 53);
+  font-size: 22px;
 }
 
 .difficulty-buttons {
