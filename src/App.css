@@ -26,6 +26,11 @@
   .card>div.image-container {
     height: 150px;
   }
+
+  img.disney {
+    height: 40svh;
+    width: auto;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -186,7 +191,7 @@ button {
 
 .gameover-container>.gameover img {
   height: auto;
-  width: 60svw;
+  width: 50svw;
 }
 
 .gameover-container h2, .gameover-container button {
@@ -198,4 +203,8 @@ button {
 .score {
   display: flex;
   justify-content: space-around;
+}
+
+.disney {
+  width: 100%;
 }
