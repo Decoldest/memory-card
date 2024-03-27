@@ -8,7 +8,7 @@ Game.propTypes = {
   setGameOver: PropTypes.func,
   score: PropTypes.number,
   setScore: PropTypes.func,
-  difficulty: PropTypes.number
+  difficulty: PropTypes.number,
 };
 
 function shuffleArray(array) {
@@ -32,17 +32,16 @@ export default function Game({
   setGameOver,
   score,
   setScore,
-  difficulty
+  difficulty,
 }) {
   const [seenCharacters, setSeenCharacters] = useState([]);
   const [cardStates, setCardStates] = useState([]);
 
-  useEffect(()=> {
-    setCardStates([...characterData].splice(0, difficulty))
-  }, [characterData, difficulty])
+  useEffect(() => {
+    setCardStates(shuffleArray([...characterData]).splice(0, difficulty));
+  }, [characterData, difficulty]);
 
   const shuffleCardState = () => {
-    console.log(cardStates);
     const temp = shuffleArray([...cardStates]);
     setCardStates(temp);
   };

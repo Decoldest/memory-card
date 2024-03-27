@@ -18,9 +18,13 @@ export default function App() {
   const [difficulty, setDifficulty] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    // const characterIndices = shuffleArray(indices).slice(0, difficulty);
+  function resetGame() {
+    setScore(0);
+    setIsPlaying(false);
+    setGameOver({ isOver: false, win: false });
+  }
 
+  useEffect(() => {
     async function getCharacters() {
       try {
         const fetchedCharacterData = await Promise.all(
@@ -64,7 +68,7 @@ export default function App() {
           />
         </div>
       )}
-      {gameOver.isOver && <GameOver win={gameOver.win} />}
+      {gameOver.isOver && <GameOver win={gameOver.win} resetGame={resetGame} />}
     </main>
   );
 }

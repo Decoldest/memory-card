@@ -26,6 +26,12 @@
   .card>div.image-container {
     height: 150px;
   }
+
+  div.gameover-container h2, div.gameover-container button {
+    font-size: 12px;
+    position: relative;
+    top: -30%;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -110,12 +116,29 @@ img {
 }
 
 .gameover-container {
-  top: 2px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
   position: absolute;
-  width: 400px;
-  height: 400px;
-  z-index: 2;
-  border: solid grey 1px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 110%;
+  background-color: rgb(76, 76, 76, 0.4);
+  z-index: 5;
 }
 
 .start-container {
@@ -159,4 +182,14 @@ img {
 
 button {
   background-color: #1A5354FF;
+}
+
+.gameover-container>.gameover {
+  height: 60%;
+  width: auto  ;
+}
+
+.gameover-container>h2, .gameover-container>button {
+  position: relative;
+  top: -25%;
 }
